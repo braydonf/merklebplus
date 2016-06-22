@@ -121,15 +121,25 @@ describe('B+ Tree', function() {
     });
     it('will split root leaf node and create a new internal node as root', function(done) {
       var tree = new Tree({db: db, keySize: 8, valueSize: 32, branchingFactor: 4});
-      async.map(pairs, function(pair, next) {
-        tree.insert(pair.key, pair.value, next);
+      async.mapSeries(pairs, function(pair, next) {
+        tree.insert(pair.key, pair.value, function(err, pointer) {
+          next(err, pointer);
+        });
       }, function(err, results) {
         if (err) {
           return done(err);
         }
-        var rootHash = utils.sha256(tree.root.toBuffer());
+        var rootHash = tree.root.hash();
         results[4].should.deep.equal(rootHash);
-        done();
+        async.mapSeries(pairs, function(pair, next) {
+          tree.get(pair.key, function(err, value) {
+            if (err) {
+              return done(err);
+            }
+            value.should.deep.equal(pair.value);
+            next();
+          });
+        }, done);
       });
     });
     it('insert 32 random items', function(done) {
