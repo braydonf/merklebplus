@@ -1,4 +1,4 @@
-bplustree
+merklebplus
 =========
 
 ## Description
@@ -11,8 +11,8 @@ Prototype implementation of a [B+ tree](https://en.wikipedia.org/wiki/B%2B_tree)
 var memdown = require('memdown');
 var levelup = require('levelup');
 
-var bplus = require('bplustree');
-var Tree = bplus.Tree;
+var merklebplus = require('merklebplus');
+var Tree = merklebplus.Tree;
 
 var db = levelup({db: memdown, keyEncoding: 'binary', valueEncoding: 'binary'});
 
