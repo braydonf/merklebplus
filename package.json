@@ -1,6 +1,6 @@
 {
   "name": "merklebplus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Experimental",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,10 @@
     "coverage": "istanbul cover _mocha -- --recursive -R spec"
   },
   "author": "Braydon Fuller",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/braydonf/merklebplus.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "async": "^2.0.1",
